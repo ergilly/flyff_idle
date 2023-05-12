@@ -71,7 +71,6 @@ function createCharacter(setRightColumnView) {
 }
 
 const LoopRadioGroup = ({characters, setRightColumnView}) => {
-    console.log(characters);
     return(
         <div>
             {characters.map((character, i) => (
