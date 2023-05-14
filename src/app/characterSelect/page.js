@@ -38,7 +38,7 @@ const Page = () => {
           return console.log(error);
         }
         const characterData = result.data().characters
-        const updatedCharacters = characterData.length < 6 ? [...characterData, ...Array(6 - characterData.length).fill("")] : characterData;
+        const updatedCharacters = characterData.length < 6 ? [...characterData, ...Array(6 - characterData.length).fill({0: 0})] : characterData;
         await setCharacters(updatedCharacters)
       }
     }
@@ -49,7 +49,8 @@ const Page = () => {
   const [selected, setSelected] = useState(null)
   const router = useRouter()
 
-  return (
+  if(characters.length > 0) {
+    return (
     <>
       <div className="flex min-h-full flex-col font-mono" >
       <Disclosure as="nav" className="bg-gray-800">
@@ -219,6 +220,7 @@ const Page = () => {
                 selected={selected}
                 setSelected={setSelected}
                 setRightColumnView={setRightColumnView}
+                router={router}
               />
             )}              
             { rightColumnView === 'Character Information' && <CharacterCreate router={router}/>}
@@ -228,7 +230,7 @@ const Page = () => {
         </div>
       </div>
     </>
-  )
+  )} else {return <></>}
 }
 
 export default Page

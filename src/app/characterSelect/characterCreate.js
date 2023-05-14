@@ -78,7 +78,7 @@ async function submitCharacter(event, router, characterName, characterSex) {
     const character = {
       [newCharId]: {
         action: null,
-        class: 'vagrant',
+        class: 'Vagrant',
         lastOnline: current_timestamp,
         level: 1,
         name: characterName,

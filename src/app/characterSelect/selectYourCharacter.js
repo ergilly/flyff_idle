@@ -2,8 +2,7 @@ import { memo } from "react";
 import { RadioGroup } from '@headlessui/react'
 import LoopRadioGroup from './loopRadioGroup'
 
-const SelectCharacter = ( {characters, selected, setSelected, setRightColumnView} ) => {
-  console.log("child render");
+const SelectCharacter = ( {characters, selected, setSelected, setRightColumnView, router} ) => {
   return (
     <div className="bg-gray-800 pt-8 px-4 pb-8 sm:px-6 lg:px-8 justify-center bg-opacity-60 h-full">       
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 content-center">
@@ -12,7 +11,7 @@ const SelectCharacter = ( {characters, selected, setSelected, setRightColumnView
         <RadioGroup value={selected} onChange={setSelected} className="mx-10">
           <RadioGroup.Label className="sr-only">Server size</RadioGroup.Label>
           <div className="space-y-4">
-            <LoopRadioGroup characters={characters} setRightColumnView={setRightColumnView}/>
+            <LoopRadioGroup characters={characters} setRightColumnView={setRightColumnView} router={router}/>
           </div>
         </RadioGroup>
       </div>
