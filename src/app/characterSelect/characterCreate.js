@@ -16,8 +16,6 @@ function handleCharacterName(evt, setCharacterName) {
 
 
 function sexSelect(setCharacterSex) {
-  console.log(characters);
-
     return(
       <div className="flex justify-center">
         <div className="mb-[0.125rem] mr-4 inline-block min-h-[1.5rem] pl-[1.5rem] text-white font-bold">
@@ -80,7 +78,7 @@ async function submitCharacter(event, router, characterName, characterSex) {
     const character = {
       [newCharId]: {
         action: null,
-        class: 'vagrant',
+        class: 'Vagrant',
         lastOnline: current_timestamp,
         level: 1,
         name: characterName,
