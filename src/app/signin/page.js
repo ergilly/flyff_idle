@@ -38,7 +38,7 @@ function Page() {
     }
 
     return (
-        <div className="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8 bg-[url('https://firebasestorage.googleapis.com/v0/b/flyff-idle.appspot.com/o/images%2Fapp%2Fog_flyff.jpg?alt=media&token=302c6f8d-8e5b-41c2-89b6-67fcde047383')] bg-no-repeat bg-cover bg-center">
+        <div className="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8 bg-[url('https://firebasestorage.googleapis.com/v0/b/flyff-idle.appspot.com/o/images%2Fapp%2Fog_flyff-transformed.jpg?alt=media&token=574c202d-d695-4481-85bd-8fcdb197fb79')] bg-no-repeat bg-cover bg-center">
             <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
                 <div className="bg-white bg-opacity-90 px-6 py-6 shadow sm:rounded-lg sm:px-12">
                     <div className="sm:mx-auto sm:w-full sm:max-w-md">
@@ -79,23 +79,6 @@ function Page() {
                 </div>
             </div>
         </div>
-    // <div classNameName="wrapper">
-    //     <div classNameName="form-wrapper">
-    //         <h1 classNameName="mt-60 mb-30">Sign in</h1>
-    //         <form onSubmit={handleForm} classNameName="form">
-    //             <label htmlFor="email">
-    //                 <p>Email</p>
-    //                 <input onChange={(e) => setEmail(e.target.value)} required type="email" name="email" id="email" placeholder="example@mail.com" />
-    //             </label>
-    //             <label htmlFor="password">
-    //                 <p>Password</p>
-    //                 <input onChange={(e) => setPassword(e.target.value)} required type="password" name="password" id="password" placeholder="password" />
-    //             </label>
-    //             <button type="submit">Sign in</button>
-    //         </form>
-    //     </div>
-
-    // </div>
     );
 }
 

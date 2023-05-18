@@ -2,48 +2,41 @@
 import React, { Fragment, useState } from "react";
 import { useAuthContext } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
+import Sidebar from './components/sidebar'
+import Character from './components/character'
+import Inventory from './components/inventory'
+import Map from './components/map'
 
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import {
   Bars3Icon,
   BellIcon,
-  CalendarIcon,
-  ChartPieIcon,
-  Cog6ToothIcon,
-  DocumentDuplicateIcon,
-  FolderIcon,
-  HomeIcon,
-  UsersIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline'
-import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
+import { ChevronDownIcon } from '@heroicons/react/20/solid'
+
+const imageUrl = 'https://firebasestorage.googleapis.com/v0/b/flyff-idle.appspot.com/o'
 
 const navigation = [
-  { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
-  { name: 'Team', href: '#', icon: UsersIcon, current: false },
-  { name: 'Projects', href: '#', icon: FolderIcon, current: false },
-  { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
-  { name: 'Documents', href: '#', icon: DocumentDuplicateIcon, current: false },
-  { name: 'Reports', href: '#', icon: ChartPieIcon, current: false },
-]
-const teams = [
-  { id: 1, name: 'Heroicons', href: '#', initial: 'H', current: false },
-  { id: 2, name: 'Tailwind Labs', href: '#', initial: 'T', current: false },
-  { id: 3, name: 'Workcation', href: '#', initial: 'W', current: false },
+  { name: 'Character', href: '#', icon: '/images%2Fclass%2Fold_male%2Fvagrant.png?alt=media&token=916ae091-f983-4558-b458-b755df67813b', current: true },
+  { name: 'Inventory', href: '#', icon: '/images%2Fitem%2F624-syssysscrbagbag01.png?alt=media&token=ea58bbba-bc11-4648-a875-0cf399a0490e', current: false },
+  { name: 'Map', href: '#', icon: '/images%2Fitem%2F7506-syssysquempdre3.png?alt=media&token=e8cc18ff-071c-4b5b-858c-82c9363f1115', current: false },
 ]
 const userNavigation = [
   { name: 'Your profile', href: '#' },
   { name: 'Sign out', href: '#' },
 ]
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
-
-function Page() {
+const Page = () => {
     const { user } = useAuthContext()
     const router = useRouter()
+        console.log(router)
     const [sidebarOpen, setSidebarOpen] = useState(false)
+    const [windowContent, setWindowContent] = useState(navigation[0])
+
+    const classNames = (...classes) => {
+      return classes.filter(Boolean).join(' ')
+    }
 
     React.useEffect(() => {
         if (user == null) router.push("/")
@@ -51,7 +44,7 @@ function Page() {
 
     return (
         <>
-          <div>
+          <div className="font-mono">
             <Transition.Root show={sidebarOpen} as={Fragment}>
               <Dialog as="div" className="relative z-50 lg:hidden" onClose={setSidebarOpen}>
                 <Transition.Child
@@ -93,146 +86,15 @@ function Page() {
                           </button>
                         </div>
                       </Transition.Child>
-                      {/* Sidebar component, swap this element with another sidebar if you like */}
-                      <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6 pb-4 ring-1 ring-white/10">
-                        <div className="flex h-16 shrink-0 items-center">
-                          <img
-                            className="h-8 w-auto"
-                            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                            alt="Your Company"
-                          />
-                        </div>
-                        <nav className="flex flex-1 flex-col">
-                          <ul role="list" className="flex flex-1 flex-col gap-y-7">
-                            <li>
-                              <ul role="list" className="-mx-2 space-y-1">
-                                {navigation.map((item) => (
-                                  <li key={item.name}>
-                                    <a
-                                      href={item.href}
-                                      className={classNames(
-                                        item.current
-                                          ? 'bg-gray-800 text-white'
-                                          : 'text-gray-400 hover:text-white hover:bg-gray-800',
-                                        'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
-                                      )}
-                                    >
-                                      <item.icon className="h-6 w-6 shrink-0" aria-hidden="true" />
-                                      {item.name}
-                                    </a>
-                                  </li>
-                                ))}
-                              </ul>
-                            </li>
-                            <li>
-                              <div className="text-xs font-semibold leading-6 text-gray-400">Your teams</div>
-                              <ul role="list" className="-mx-2 mt-2 space-y-1">
-                                {teams.map((team) => (
-                                  <li key={team.name}>
-                                    <a
-                                      href={team.href}
-                                      className={classNames(
-                                        team.current
-                                          ? 'bg-gray-800 text-white'
-                                          : 'text-gray-400 hover:text-white hover:bg-gray-800',
-                                        'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
-                                      )}
-                                    >
-                                      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white">
-                                        {team.initial}
-                                      </span>
-                                      <span className="truncate">{team.name}</span>
-                                    </a>
-                                  </li>
-                                ))}
-                              </ul>
-                            </li>
-                            <li className="mt-auto">
-                              <a
-                                href="#"
-                                className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white"
-                              >
-                                <Cog6ToothIcon className="h-6 w-6 shrink-0" aria-hidden="true" />
-                                Settings
-                              </a>
-                            </li>
-                          </ul>
-                        </nav>
-                      </div>
+                      <Sidebar navigation={navigation} setWindowContent={setWindowContent}/>
                     </Dialog.Panel>
                   </Transition.Child>
                 </div>
               </Dialog>
             </Transition.Root>
     
-            {/* Static sidebar for desktop */}
             <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
-              {/* Sidebar component, swap this element with another sidebar if you like */}
-              <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6 pb-4">
-                <div className="flex h-16 shrink-0 items-center">
-                  <img
-                    className="h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                    alt="Your Company"
-                  />
-                </div>
-                <nav className="flex flex-1 flex-col">
-                  <ul role="list" className="flex flex-1 flex-col gap-y-7">
-                    <li>
-                      <ul role="list" className="-mx-2 space-y-1">
-                        {navigation.map((item) => (
-                          <li key={item.name}>
-                            <a
-                              href={item.href}
-                              className={classNames(
-                                item.current
-                                  ? 'bg-gray-800 text-white'
-                                  : 'text-gray-400 hover:text-white hover:bg-gray-800',
-                                'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
-                              )}
-                            >
-                              <item.icon className="h-6 w-6 shrink-0" aria-hidden="true" />
-                              {item.name}
-                            </a>
-                          </li>
-                        ))}
-                      </ul>
-                    </li>
-                    <li>
-                      <div className="text-xs font-semibold leading-6 text-gray-400">Your teams</div>
-                      <ul role="list" className="-mx-2 mt-2 space-y-1">
-                        {teams.map((team) => (
-                          <li key={team.name}>
-                            <a
-                              href={team.href}
-                              className={classNames(
-                                team.current
-                                  ? 'bg-gray-800 text-white'
-                                  : 'text-gray-400 hover:text-white hover:bg-gray-800',
-                                'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
-                              )}
-                            >
-                              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white">
-                                {team.initial}
-                              </span>
-                              <span className="truncate">{team.name}</span>
-                            </a>
-                          </li>
-                        ))}
-                      </ul>
-                    </li>
-                    <li className="mt-auto">
-                      <a
-                        href="#"
-                        className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white"
-                      >
-                        <Cog6ToothIcon className="h-6 w-6 shrink-0" aria-hidden="true" />
-                        Settings
-                      </a>
-                    </li>
-                  </ul>
-                </nav>
-              </div>
+              <Sidebar navigation={navigation} setWindowContent={setWindowContent}/>
             </div>
     
             <div className="lg:pl-72">
@@ -245,23 +107,11 @@ function Page() {
                 {/* Separator */}
                 <div className="h-6 w-px bg-gray-900/10 lg:hidden" aria-hidden="true" />
     
-                <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
-                  <form className="relative flex flex-1" action="#" method="GET">
-                    <label htmlFor="search-field" className="sr-only">
-                      Search
-                    </label>
-                    <MagnifyingGlassIcon
-                      className="pointer-events-none absolute inset-y-0 left-0 h-full w-5 text-gray-400"
-                      aria-hidden="true"
-                    />
-                    <input
-                      id="search-field"
-                      className="block h-full w-full border-0 py-0 pl-8 pr-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm"
-                      placeholder="Search..."
-                      type="search"
-                      name="search"
-                    />
-                  </form>
+                <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6 place-content-between">
+                  <div className="flex items-center font-extrabold" >
+                    <img src={imageUrl + windowContent.icon} className="h-6 w-6 shrink-0 mr-4" aria-hidden="true" />
+                    {windowContent.name}
+                  </div>
                   <div className="flex items-center gap-x-4 lg:gap-x-6">
                     <button type="button" className="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500">
                       <span className="sr-only">View notifications</span>
@@ -319,8 +169,12 @@ function Page() {
                 </div>
               </div>
     
-              <main className="py-10">
-                <div className="px-4 sm:px-6 lg:px-8">{/* Your content */}</div>
+              <main className="py-8">
+                <div className="py-16 fixed top-0 max-h-screen">
+                  {windowContent.name === "Character" && <Character/>}
+                  {windowContent.name === "Inventory" && <Inventory/>}
+                  {windowContent.name === "Map" && <Map/>}
+                </div>
               </main>
             </div>
           </div>
