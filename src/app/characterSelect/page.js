@@ -6,8 +6,8 @@ import { Bars3Icon, BellIcon, XMarkIcon, UserIcon } from '@heroicons/react/24/ou
 import getCurrentUser from '@/firebase/auth/currentUser';
 import getData from "@/firebase/firestore/getData";
 
-import CharacterCreate from './characterCreate'
-import SelectCharacter from './selectYourCharacter';
+import CharacterCreate from './components/characterCreate'
+import SelectCharacter from './components/selectYourCharacter';
 
 const navigation = []
 const userNavigation = [
